@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pythagoras</title>
+    <link rel="stylesheet" href="./include/style.css">
+  </head>
+  <body>
+    <h2>Pythagoras, radialen, graden, hoekmeting</h2>
+	<h3>Robin de Groot klas GD1A</h3>
+		
+			lengte:<br>
+			AB = <span id = "AB"> lengte in pixels </span>  px<br>
+			BC = <span id = "BC"> lengte in pixels </span>  px<br>
+			AC = <span id = "AC"> lengte in pixels </span>  px<br>
+			<br><br>hoeken:<br>
+			angle A = <span id = "angleA"> hoek in graden</span>  <sup>0</sup> <br>
+			angle C = <span id = "angleC"> hoek in graden </span>  <sup>0</sup> <br>
+			som van de hoeken: A + 90 + C = <span id = "angleTotal"> <!-- angle here --> </span> <sup>0</sup> <br>
+			<span id = "incorrect"> <!-- text here--></span>		
+    <canvas id="canvas" width="300" height="300"></canvas>
+	       
+   
+    <script src="./include/utils.js"></script>
+    <script src="./classes/triangleABC.js"></script>
+    <script>
+    window.onload = function () {
+		  var canvas = document.getElementById('canvas'),
+          context = canvas.getContext('2d'),
+          mouse = utils.captureMouse(canvas),
+          
+		  triangle = new Triangle(); // instance 
+		  
+        
+		  (function drawFrame () {
+			 window.requestAnimationFrame(drawFrame, canvas);
+			 context.clearRect(0, 0, canvas.width, canvas.height);
+			 triangle.xLeft = canvas.width / 2;
+			 triangle.yLeft = canvas.height / 2;
+			 triangle.x = mouse.x;
+			 triangle.y = mouse.y;
+			 triangle.draw(context);
+			 
+			document.getElementById("AB").innerHTML = triangle.AB();
+            document.getElementById("BC").innerHTML = triangle.BC();
+            document.getElementById("AC").innerHTML = triangle.AC();
+            document.getElementById("angleA").innerHTML = triangle.angleA();
+            document.getElementById("angleC").innerHTML = triangle.angleC();
+            document.getElementById("angleTotal").innerHTML = Math.abs(triangle.angleA() )+ Math.abs(triangle.angleC()) + 90;
+
+			 
+			 
+			 
+			
+		  }());
+    };
+	</script>
+  </body>
+</html>
